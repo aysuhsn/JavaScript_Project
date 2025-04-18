@@ -8,7 +8,7 @@
 
 
 form{
-    height: 620px;
+    height: 650px;
     width: 400px;
     background-color: white;
     position: absolute;
@@ -77,9 +77,16 @@ input{
     font-size: 14px;
     font-weight: 300;
 }
+.account{
+    display: flex;
+    justify-content: space-between;
+}
+p a{
+    color: rgb(34, 137, 255);
 
+}
 button{
-    margin-top: 20px;
+    margin-top: 5px;
     width: 100%;
     background-color: #F75145;
     color: white;

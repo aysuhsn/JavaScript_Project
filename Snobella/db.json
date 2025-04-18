@@ -1,0 +1,57 @@
+{
+    "products": [
+        {
+          "id": 1,
+          "image": "./assets/images/bag1.png",
+          "star": "./assets/images/star.png",
+          "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
+          "price": 130.00,
+          "description": "From $340.00"
+        },
+
+        {
+            "id": 2,
+            "image": "./assets/images/bag2.png",
+            "star": "./assets/images/star.png",
+            "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
+            "price": 130.00,
+            "description": "From $340.00"
+          },
+
+          {
+            "id": 3,
+            "image": "./assets/images/bag3.png",
+            "star": "./assets/images/star.png",
+            "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
+            "price": 130.00,
+            "description": "From $340.00"
+          },
+
+          {
+            "id": 4,
+            "image": "./assets/images/bag4.png",
+            "star": "./assets/images/star.png",
+            "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
+            "price": 130.00,
+            "description": "From $340.00"
+          },
+
+          {
+            "id": 5,
+            "image": "./assets/images/bag5.png",
+            "star": "./assets/images/star.png",
+            "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
+            "price": 130.00,
+            "description": "From $340.00"
+          },
+
+          {
+            "id": 6,
+            "image": "./assets/images/bag6.png",
+            "star": "./assets/images/star.png",
+            "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
+            "price": 130.00,
+            "description": "From $340.00"
+          }
+    ]
+    }
