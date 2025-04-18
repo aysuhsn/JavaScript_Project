@@ -1,0 +1,92 @@
+/* Navbar */
+.sign{
+  gap: 10px;
+  align-items: center;
+}
+
+.search{
+  width: 300px;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-input {
+  padding-right: 40px; 
+  border-radius: 10px;
+  background-color: #f8f9fc;
+  border: none;
+  box-shadow: none;
+}
+
+.search-input:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: #6c757d; 
+  pointer-events: none;
+}
+
+.dropdown .bi-person {
+  color: #000;
+  cursor: pointer;
+}
+
+
+/* Navbarin responsivliyi */
+@media (max-width: 992px) {
+  .navbar .container-md {
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+  }
+
+  .search {
+    width: 100% !important;
+  }
+
+  .search-wrapper {
+    max-width: 100%;
+  }
+
+  .sign {
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .sign a img {
+    width: 50px;
+    height: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .container-md {
+    padding: 1rem;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+  }
+
+  .search-icon {
+    right: 10px;
+    font-size: 16px;
+  }
+
+  .sign {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
