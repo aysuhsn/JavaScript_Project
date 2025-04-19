@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     let products = (await axios("http://localhost:3001/products")).data;
+
     let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let container = document.querySelector(".cards");
@@ -7,26 +8,58 @@ document.addEventListener("DOMContentLoaded", async () => {
     let filtered = products.filter(product => favorites.includes(product.id.toString()));
 
     if (filtered.length === 0) {
-        container.innerHTML = "<p style='margin-left:20px;'>Heç bir favori mehsul yoxdur.</p>";
+        let msg = document.createElement("p");
+        msg.style.marginLeft = "20px";
+        msg.textContent = "Hec bir favori mehsul yoxdur.";
+        container.appendChild(msg);
     }
 
     filtered.forEach(product => {
         let card = document.createElement("div");
         card.classList.add("card");
 
-        card.innerHTML = `
-            <i class="fa-solid fa-xmark heart-icon" data-id="${product.id}" title="Remove from favorites"></i>
-            <div class="bags">
-                <img class="bag" src="${product.image}" alt="">
-            </div>
-            <img class="star" src="${product.star}">
-            <h5>${product.title.slice(0, 80)}...</h5>
-            <div class="price">
-                <p>$${product.price}.00</p>
-                <span>${product.description}</span>
-            </div>
-            <button class="add-to-cart" id="${product.id}">Add to Cart</button>
-        `;
+        let closeIcon = document.createElement("i");
+        closeIcon.className = "fa-solid fa-xmark heart-icon";
+        closeIcon.setAttribute("data-id", product.id);
+        closeIcon.title = "Remove from favorites";
+        card.appendChild(closeIcon);
+
+        let bagsDiv = document.createElement("div");
+        bagsDiv.className = "bags";
+
+        let img = document.createElement("img");
+        img.className = "bag";
+        img.src = product.image;
+        img.alt = "";
+        bagsDiv.appendChild(img);
+        card.appendChild(bagsDiv);
+
+        let starImg = document.createElement("img");
+        starImg.className = "star";
+        starImg.src = product.star;
+        card.appendChild(starImg);
+
+        let title = document.createElement("h5");
+        title.textContent = product.title.slice(0, 80) + "...";
+        card.appendChild(title);
+
+        let priceDiv = document.createElement("div");
+        priceDiv.className = "price";
+
+        let price = document.createElement("p");
+        price.textContent = `$${product.price}.00`;
+
+        let desc = document.createElement("span");
+        desc.textContent = product.description;
+
+        priceDiv.append(price, desc);
+        card.appendChild(priceDiv);
+
+        let btn = document.createElement("button");
+        btn.className = "add-to-cart";
+        btn.id = product.id;
+        btn.textContent = "Add to Cart";
+        card.appendChild(btn);
 
         container.appendChild(card);
     });
@@ -57,19 +90,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     let clearAllBtn = document.querySelector("#clear-all");
-
     if (favorites.length === 0) {
         clearAllBtn.style.display = "none";
     } else {
-        clearAllBtn.style.display = "block"; 
+        clearAllBtn.style.display = "block";
     }
 
-    document.querySelector("#clear-all").addEventListener("click", () => {
+    clearAllBtn.addEventListener("click", () => {
         if (confirm("Butun favorileri silmek istediyinize eminsiniz?")) {
             favorites = [];
             localStorage.setItem("favorites", JSON.stringify(favorites));
-            container.innerHTML = "<p style='margin-left:20px;'>Hec bir favori mehsul yoxdur.</p>";
-            clearAllBtn.style.display = "none"; 
+            container.innerHTML = ""; 
+
+            let msg = document.createElement("p");
+            msg.style.marginLeft = "20px";
+            msg.textContent = "Hec bir favori mehsul yoxdur.";
+            container.appendChild(msg);
+
+            clearAllBtn.style.display = "none";
         }
     });
 
@@ -81,11 +119,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (isLoggedIn && loggedInUser) {
         dropdownButton.textContent = loggedInUser.username;
 
-        dropdownMenu.innerHTML = `
-            <li><a class="dropdown-item logout-btn" href="#">Logout</a></li>
-        `;
+        dropdownMenu.innerHTML = "";
+        let li = document.createElement("li");
+        let logout = document.createElement("a");
+        logout.className = "dropdown-item logout-btn";
+        logout.href = "#";
+        logout.textContent = "Logout";
+        li.appendChild(logout);
+        dropdownMenu.appendChild(li);
 
-        document.querySelector(".logout-btn").addEventListener("click", () => {
+        logout.addEventListener("click", () => {
             localStorage.removeItem("loggedInUser");
             localStorage.setItem("isLoggedIn", "false");
 
@@ -103,9 +146,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     } else {
         dropdownButton.textContent = "Sign Up";
-        dropdownMenu.innerHTML = `
-            <li><a class="dropdown-item" href="login.html">Login</a></li>
-            <li><a class="dropdown-item" href="signup.html">Sign Up</a></li>
-        `;
+        dropdownMenu.innerHTML = "";
+
+        let loginLi = document.createElement("li");
+        let loginLink = document.createElement("a");
+        loginLink.className = "dropdown-item";
+        loginLink.href = "login.html";
+        loginLink.textContent = "Login";
+        loginLi.appendChild(loginLink);
+
+        let signupLi = document.createElement("li");
+        let signupLink = document.createElement("a");
+        signupLink.className = "dropdown-item";
+        signupLink.href = "signup.html";
+        signupLink.textContent = "Sign Up";
+        signupLi.appendChild(signupLink);
+
+        dropdownMenu.append(loginLi, signupLi);
     }
 });

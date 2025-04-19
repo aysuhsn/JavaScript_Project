@@ -1,76 +1,60 @@
 document.addEventListener("DOMContentLoaded", async () => {
   let products = (await axios("http://localhost:3001/products")).data;
+  let userCard = document.querySelector(".cards");
 
   function createUsercard() {
-    let userCard = document.querySelector(".cards");
-
     products.forEach((product, index) => {
       let card = document.createElement("div");
       card.classList.add("card");
 
-      card.innerHTML = `
-        <div class="bags">
-          <img class="bag" src="${product.image}" alt="">
-        </div>
-        <img class="star" src="${product.star}">
-        <h5>${product.title.slice(0, 40)}...</h5>
-        <div class="price">
-          <p>$${product.price}.00</p>
-          <span>${product.description}</span>
-        </div>
-        <button class="add-to-cart" id="${product.id}">Add to Cart</button>
-      `;
-
       let heart = document.createElement("i");
       heart.className = "fa-regular fa-heart heart-icon";
-      card.appendChild(heart);
-
       let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
       if (favorites.includes(product.id)) {
         heart.classList.add("fa-solid", "active");
         heart.classList.remove("fa-regular");
       }
+      card.appendChild(heart);
 
-      heart.addEventListener("click", function () {
-        heart.classList.toggle("fa-solid");
-        heart.classList.toggle("fa-regular");
-        heart.classList.toggle("active");
+      let bags = document.createElement("div");
+      bags.className = "bags";
+      let bagImg = document.createElement("img");
+      bagImg.className = "bag";
+      bagImg.src = product.image;
+      bags.appendChild(bagImg);
+      card.appendChild(bags);
 
-        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      let starImg = document.createElement("img");
+      starImg.className = "star";
+      starImg.src = product.star;
+      card.appendChild(starImg);
 
-        if (heart.classList.contains("active")) {
-          favorites.push(product.id);
-          localStorage.setItem("favorites", JSON.stringify(favorites));
+      let title = document.createElement("h5");
+      title.textContent = product.title.slice(0, 40) + "...";
+      card.appendChild(title);
 
-          Toastify({
-            text: "Sevimlilere elave edildi",
-            duration: 1000,
-            gravity: "top",
-            position: "right",
-            style: {
-              background: "linear-gradient(to right, #00b09b, #96c93d)",
-            },
-          }).showToast();
+      let priceDiv = document.createElement("div");
+      priceDiv.className = "price";
 
-        } else {
-          favorites = favorites.filter((itemId) => itemId != product.id);
-          localStorage.setItem("favorites", JSON.stringify(favorites));
+      let priceP = document.createElement("p");
+      priceP.textContent = `$${product.price}.00`;
 
-          Toastify({
-            text: "Sevimlilerden silindi",
-            duration: 1000,
-            gravity: "top",
-            position: "right",
-            style: {
-              background: "linear-gradient(to right, #e53935, #e35d5b)",
-            },
-          }).showToast();
-        }
-      });
+      let desc = document.createElement("span");
+      desc.textContent = product.description;
 
+      priceDiv.append(priceP, desc);
+      card.appendChild(priceDiv);
+
+      // Add to Cart button
+      let addToCartBtn = document.createElement("button");
+      addToCartBtn.className = "add-to-cart";
+      addToCartBtn.id = product.id;
+      addToCartBtn.textContent = "Add to Cart";
+      card.appendChild(addToCartBtn);
+
+      // Badge
       let badge = document.createElement("div");
       badge.classList.add("badge");
-
       if (index === 0 || index === 3) {
         badge.textContent = "New";
         badge.classList.add("new");
@@ -80,6 +64,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         badge.classList.add("discount");
         card.appendChild(badge);
       }
+
+      // Heart click
+      heart.addEventListener("click", () => {
+        heart.classList.toggle("fa-solid");
+        heart.classList.toggle("fa-regular");
+        heart.classList.toggle("active");
+
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        if (heart.classList.contains("active")) {
+          favorites.push(product.id);
+          Toastify({
+            text: "Sevimlilərə əlavə edildi",
+            duration: 1000,
+            gravity: "top",
+            position: "right",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+          }).showToast();
+        } else {
+          favorites = favorites.filter((itemId) => itemId != product.id);
+          Toastify({
+            text: "Sevimlilərdən silindi",
+            duration: 1000,
+            gravity: "top",
+            position: "right",
+            style: {
+              background: "linear-gradient(to right, #e53935, #e35d5b)",
+            },
+          }).showToast();
+        }
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+      });
 
       userCard.appendChild(card);
     });
