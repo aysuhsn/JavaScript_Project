@@ -18,15 +18,16 @@
 .search-input {
   padding-right: 40px; 
   border-radius: 10px;
-  background-color: #f8f9fc;
-  border: none;
+  background-color: white;
+  border: 1px solid #ced4da;
   box-shadow: none;
 }
 
 .search-input:focus {
-  box-shadow: none;
-  border: none;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ced4da;
 }
+
 
 .search-icon {
   position: absolute;
@@ -242,7 +243,6 @@
 .heart-icon:hover {
   transform: scale(1.2);
 }
-
 .badge {
   position: absolute;
   top: 10px;
@@ -338,11 +338,6 @@ h5{
 
 
 /* Footer */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 body {
   font-family: Arial, sans-serif;
@@ -355,7 +350,6 @@ body {
   padding: 0 20px;
 }
 
-/* Footer */
 .footer-search-bar {
   background-color: #f9f9f9;
   padding: 20px 0;

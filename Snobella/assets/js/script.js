@@ -25,6 +25,26 @@ document.addEventListener("DOMContentLoaded", async () => {
         let heart = document.createElement("i");
         heart.className = "fa-regular fa-heart heart-icon";
         card.appendChild(heart);
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        if (favorites.includes(product.id)) {
+          heart.classList.add("fa-solid", "active");
+          heart.classList.remove("fa-regular");
+        }
+        heart.addEventListener("click", function () {
+          heart.classList.toggle("fa-solid");
+          heart.classList.toggle("fa-regular");
+          heart.classList.toggle("active");
+  
+          let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  
+          if (heart.classList.contains("active")) {
+            favorites.push(product.id);
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+          } else {
+            favorites = favorites.filter((itemId) => itemId != product.id);
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+          }
+        });
   
         let badge = document.createElement("div");
         badge.classList.add("badge");
