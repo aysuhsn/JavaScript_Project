@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         let card = document.createElement("div");
         card.classList.add("card");
   
-        // Kart içeriği
         card.innerHTML = `
           <div class="bags">
             <img class="bag" src="${product.image}" alt="">
