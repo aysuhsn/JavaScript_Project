@@ -1,57 +1,52 @@
 {
-    "products": [
-        {
-          "id": 1,
-          "image": "./assets/images/bag1.png",
-          "star": "./assets/images/star.png",
-          "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
-          "price": 130.00,
-          "description": "From $340.00"
-        },
-
-        {
-            "id": 2,
-            "image": "./assets/images/bag2.png",
-            "star": "./assets/images/star.png",
-            "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
-            "price": 130.00,
-            "description": "From $340.00"
-          },
-
-          {
-            "id": 3,
-            "image": "./assets/images/bag3.png",
-            "star": "./assets/images/star.png",
-            "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
-            "price": 130.00,
-            "description": "From $340.00"
-          },
-
-          {
-            "id": 4,
-            "image": "./assets/images/bag4.png",
-            "star": "./assets/images/star.png",
-            "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
-            "price": 130.00,
-            "description": "From $340.00"
-          },
-
-          {
-            "id": 5,
-            "image": "./assets/images/bag5.png",
-            "star": "./assets/images/star.png",
-            "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
-            "price": 130.00,
-            "description": "From $340.00"
-          },
-
-          {
-            "id": 6,
-            "image": "./assets/images/bag6.png",
-            "star": "./assets/images/star.png",
-            "title": "Shoulder Bag Leather Bag Leather undertakes laborious physical physical ",
-            "price": 130.00,
-            "description": "From $340.00"
-          }
-    ]
+  "products": [
+    {
+      "id": 1,
+      "image": "./assets/images/bag1.png",
+      "star": "./assets/images/star.png",
+      "title": "Elegant Shoulder Bag with Golden Strap",
+      "price": 125.00,
+      "description": "From $340.00"
+    },
+    {
+      "id": 2,
+      "image": "./assets/images/bag2.png",
+      "star": "./assets/images/star.png",
+      "title": "Classic Leather Handbag for Women",
+      "price": 140.00,
+      "description": "From $340.00"
+    },
+    {
+      "id": 3,
+      "image": "./assets/images/bag3.png",
+      "star": "./assets/images/star.png",
+      "title": "Trendy Urban Shoulder Bag – Black Edition",
+      "price": 135.00,
+      "description": "From $340.00"
+    },
+    {
+      "id": 4,
+      "image": "./assets/images/bag4.png",
+      "star": "./assets/images/star.png",
+      "title": "Vintage Leather Purse with Buckle Detail",
+      "price": 150.00,
+      "description": "From $340.00"
+    },
+    {
+      "id": 5,
+      "image": "./assets/images/bag5.png",
+      "star": "./assets/images/star.png",
+      "title": "Compact Shoulder Bag for Daily Use",
+      "price": 120.00,
+      "description": "From $340.00"
+    },
+    {
+      "id": 6,
+      "image": "./assets/images/bag6.png",
+      "star": "./assets/images/star.png",
+      "title": "Premium Quality Leather Travel Bag",
+      "price": 160.00,
+      "description": "From $340.00"
     }
+  ]
+}
