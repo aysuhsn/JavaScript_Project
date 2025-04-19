@@ -94,41 +94,39 @@
 
   
   /* Left */
-  .wishlist{
-      width: 100%;
-      display: flex;
-      gap: 60px;
-      justify-content: center;
-    }
-    
-    .wish{
-        width: 250px;
-        display: flex;
-        margin-top: 20px;
-        flex-direction: column;
-        margin-left: 120px;
-    }
-    
-    .left{
-        display: flex;
-        flex-direction: column;
-        border: 1px solid #bbbbbb;
-        padding: 10px;
-        width: 100%;
-        height: fit-content;
-        border-radius: 8px;
-        /* line-height: 10px; */
-    }
-    .left-img{
-        display: flex;
-        gap: 10px;
-    }
-    .left-bottom p i{
-        padding-left: 10px;
-    }
-    
-    
-    /* Right */
+  .wishlist {
+    width: 100%;
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+  }
+  
+  .wish {
+    width: 250px;
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    margin-left: 120px;
+  }
+  
+  .left {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #bbbbbb;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .left-img {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .left-bottom p i {
+    padding-left: 10px;
+  }
+  
   .cards {
     width: 80%;
     margin-right: 200px;
@@ -139,179 +137,265 @@
     gap: 10px;
     justify-content: space-between;
   }
-    .card{
-      position: relative;
-      width: 330px;
-      height: 500px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .heart-icon {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 20px;
-      color: #ff5b5b;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    
-    .heart-icon:hover {
-      transform: scale(1.2);
-    }
-    .badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      padding: 4px 8px;
-      font-size: 12px;
-      font-weight: bold;
-      color: #fff;
-      border-radius: 4px;
-    }
-    
-    .badge.new {
-      background-color: #2ecc71;
-      padding: 10px;
-      width: 80px;
-      font-size: 15px;
-    }
-    
-    .badge.discount {
-      background-color: #e74c3c;
-      padding: 10px;
-      width: 80px;
-      font-size: 15px;
-    }
-    .bags{
-      height: 300px;
-    }
-    .card .bag{
-      width: 100%;
-      padding: 30px 0; 
-      border-radius: 8px;
-    }
-    .star{
-      width: 90px;
-      margin-top: 50px;
-      margin-left: 12px;
-      height: 20px;
-    }
-    h5{
-      width: 90%;
-      margin: auto;
-      font-family: Rubik;
-      font-size: 12px;
-      color: #000000;
-    }
-    .price{
-      width: 90%;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .price p{
-      color: #F75145;
-      font-family: Poppins;
-      font-weight: 600;
-      font-size: 20px;
-      margin: 0;
-    }
-    .price span{
-      color: #838383;
-      font-family: Poppins;
-      font-weight: 400;
-      font-size: 16px;
-    }
-    
-    .add-to-cart {
-      padding: 10px;
-      text-transform: capitalize;
-      width: 90%;
-      margin: 15px auto;
-      border-radius: 8px;
-      border: 1px solid #6d6d6d;
-      background: transparent;
-    }
-    
-    .add-to-cart:hover {
-      background: #F75145;
-      color: #fff;
-      border: 1px solid #F75145;
-      box-shadow: 0 0 20px rgba(8,7,16,0.6);
-    
-    }
+  
+  .card {
+    position: relative;
+    width: 330px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #ff5b5b;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .heart-icon:hover {
+    transform: scale(1.2);
+  }
+  
+  .badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 4px;
+  }
+  
+  .badge.new {
+    background-color: #2ecc71;
+    padding: 10px;
+    width: 80px;
+    font-size: 15px;
+  }
+  
+  .badge.discount {
+    background-color: #e74c3c;
+    padding: 10px;
+    width: 80px;
+    font-size: 15px;
+  }
+  
+  .bags {
+    height: 300px;
+  }
+  
+  .card .bag {
+    width: 100%;
+    padding: 30px 0;
+    border-radius: 8px;
+  }
+  
+  .star {
+    width: 90px;
+    margin-top: 50px;
+    margin-left: 12px;
+    height: 20px;
+  }
+  
+  h5 {
+    width: 90%;
+    margin: auto;
+    font-family: Rubik;
+    font-size: 12px;
+    color: #000000;
+  }
+  
+  .price {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .price p {
+    color: #F75145;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  .price span {
+    color: #838383;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  
+  .add-to-cart {
+    padding: 10px;
+    text-transform: capitalize;
+    width: 90%;
+    margin: 15px auto;
+    border-radius: 8px;
+    border: 1px solid #6d6d6d;
+    background: transparent;
+  }
+  
+  .add-to-cart:hover {
+    background: #F75145;
+    color: #fff;
+    border: 1px solid #F75145;
+    box-shadow: 0 0 20px rgba(8, 7, 16, 0.6);
+  }
+  #clear-all {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+
+  #clear-all:hover {
+    background: #F75145;
+    color: #fff;
+    border: 1px solid #F75145;
+    box-shadow: 0 0 20px rgba(8, 7, 16, 0.6);
+  }
+  
 
 /* Wishlist-in Responsivliyi */
 @media (max-width: 1024px) {
     .wishlist {
       flex-direction: column;
       align-items: center;
-      gap: 30px;
+      padding: 20px;
+      gap: 40px;
     }
   
     .wish {
       margin-left: 0;
       width: 90%;
+      max-width: 400px;
       align-items: center;
     }
   
     .left {
       width: 100%;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #f9f9f9;
     }
   
-    .cards {
-      width: 100%;
-      margin: 0;
-      justify-content: center;
-      padding: 0 10px;
-    }
-  
-    .card {
-      width: 45%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .wishlist {
-      gap: 20px;
-    }
-  
-    .card {
-      width: 90%;
+    .left-top {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
     }
   
     .left-img {
+      display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+  
+    .left-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
   
     .left-bottom p {
-      font-size: 14px;
+      font-size: 16px;
+      padding: 8px 0;
+    }
+  
+    .cards {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* MƏRKƏZDƏ YERLƏŞDİRİR */
+        gap: 20px;
+        padding: 0 10px;
+      }
+      
+      .card {
+        width: 90%;
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center; /* Başlıq və qiymət ortalansın */
+      }
+
+      .card .bag {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+        object-fit: contain;
+        margin-bottom: 10px;
+      }
+      
+  
+    .card img.bag {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin-bottom: 10px;
     }
   
     h5 {
-      font-size: 14px;
-    }
-  
-    .price p {
-      font-size: 18px;
-    }
-  
-    .price span {
-      font-size: 14px;
-    }
+        font-size: 14px;
+        color: #000;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      
+      .star {
+        margin: 10px 0;
+        width: 80px;
+        height: auto;
+      }
+      
+      .price {
+        gap: 5px;
+        flex-direction: column;
+      }
+      
   
     .add-to-cart {
-      font-size: 14px;
-      padding: 8px;
+      font-size: 15px;
+      padding: 12px;
     }
   
-    .star {
-      width: 70px;
-      height: auto;
+  }
+  @media (max-width: 768px) {
+    #clear-all {
+      width: 90%;
+      margin: 20px auto;
+      display: block;
+      font-size: 15px;
     }
   }
+    
   
