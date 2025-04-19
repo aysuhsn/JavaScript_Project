@@ -77,6 +77,31 @@ input{
     font-size: 14px;
     font-weight: 300;
 }
+.input-wrapper {
+    position: relative;
+  }
+  
+  .input-wrapper input {
+    padding-right: 90px;
+  }
+  
+  .strength-text {
+    position: absolute;
+    right: 55px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+  }
+  
+  .toggle-eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+  }
+  
 .account{
     display: flex;
     justify-content: space-between;
