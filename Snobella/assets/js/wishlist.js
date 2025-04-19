@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let filtered = products.filter(product => favorites.includes(product.id.toString()));
 
     if (filtered.length === 0) {
-      container.innerHTML = "<p>Heç bir favori məhsul yoxdur.</p>";
+      container.innerHTML = "<p>Hec bir favori mehsul yoxdur.</p>";
       return;
     }
 
