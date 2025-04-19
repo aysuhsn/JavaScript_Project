@@ -42,7 +42,9 @@
   color: #000;
   cursor: pointer;
 }
-
+.dropdown-menu.show {
+  display: block !important;
+}
 
 /* Navbarin responsivliyi */
 @media (max-width: 992px) {
