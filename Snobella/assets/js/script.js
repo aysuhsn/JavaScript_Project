@@ -1,22 +1,20 @@
 function updateCartCount() {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  const count = cartItems.reduce((total, item) => total + item.quantity, 0);
-  const cartCountSpan = document.querySelector(".cart-count");
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  let count = cartItems.reduce((total, item) => total + item.quantity, 0);
+  let cartCountSpan = document.querySelector(".cart-count");
   if (cartCountSpan) {
     cartCountSpan.textContent = count;
   }
 }
 
-
 window.addToCart = function (productId) {
   let products = JSON.parse(localStorage.getItem("allProducts")) || [];
-
-  const product = products.find(p => p.id === productId);
+  let product = products.find(p => p.id === productId);
   if (!product) return;
 
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-  const existingItem = cartItems.find(item => item.id === productId);
+  let existingItem = cartItems.find(item => item.id === productId);
   if (existingItem) {
     existingItem.quantity += 1;
   } else {
@@ -43,7 +41,6 @@ window.addToCart = function (productId) {
   }).showToast();
 
   updateCartCount();
-
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -54,10 +51,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let userCard = document.querySelector(".cards");
 
-  function createUsercard() {
-    products.forEach((product, index) => {
+  function createUsercard(list) {
+    userCard.innerHTML = "";
+    list.forEach((product, index) => {
       let card = document.createElement("div");
       card.classList.add("card");
+      card.style.cursor = "pointer";
+      card.addEventListener("click", function () {
+        window.location.href = `detail.html?id=${product.id}`;
+      });
 
       let heart = document.createElement("i");
       heart.className = "fa-regular fa-heart heart-icon";
@@ -66,6 +68,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         heart.classList.add("fa-solid", "active");
         heart.classList.remove("fa-regular");
       }
+
+      heart.addEventListener("click", (e) => {
+        e.stopPropagation();
+        heart.classList.toggle("fa-solid");
+        heart.classList.toggle("fa-regular");
+        heart.classList.toggle("active");
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        if (heart.classList.contains("active")) {
+          favorites.push(product.id.toString());
+          Toastify({
+            text: "Added to favorites",
+            duration: 1000,
+            gravity: "top",
+            position: "right",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+          }).showToast();
+        } else {
+          favorites = favorites.filter((itemId) => itemId != product.id);
+          Toastify({
+            text: "Removed from favorites",
+            duration: 1000,
+            gravity: "top",
+            position: "right",
+            style: {
+              background: "linear-gradient(to right, #e53935, #e35d5b)",
+            },
+          }).showToast();
+        }
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+      });
+
       card.appendChild(heart);
 
       let bags = document.createElement("div");
@@ -101,7 +136,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       addToCartBtn.className = "add-to-cart";
       addToCartBtn.id = product.id;
       addToCartBtn.textContent = "Add to Cart";
-      addToCartBtn.addEventListener("click", function () {
+      addToCartBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
         window.addToCart(product.id);
       });
       card.appendChild(addToCartBtn);
@@ -118,44 +154,30 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.appendChild(badge);
       }
 
-      heart.addEventListener("click", () => {
-        heart.classList.toggle("fa-solid");
-        heart.classList.toggle("fa-regular");
-        heart.classList.toggle("active");
-
-        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        if (heart.classList.contains("active")) {
-          favorites.push(product.id.toString());
-
-          Toastify({
-            text: "Added to favorites",
-            duration: 1000,
-            gravity: "top",
-            position: "right",
-            style: {
-              background: "linear-gradient(to right, #00b09b, #96c93d)",
-            },
-          }).showToast();
-        } else {
-          favorites = favorites.filter((itemId) => itemId != product.id);
-          Toastify({
-            text: "Removed from favorites",
-            duration: 1000,
-            gravity: "top",
-            position: "right",
-            style: {
-              background: "linear-gradient(to right, #e53935, #e35d5b)",
-            },
-          }).showToast();
-        }
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-      });
-
       userCard.appendChild(card);
     });
   }
 
-  createUsercard();
+  createUsercard(products);
+
+  document.querySelectorAll(".dropdown-menu .dropdown-item").forEach((item, index) => {
+    item.addEventListener("click", function (e) {
+      e.preventDefault();
+      let sorted = [...products];
+      let sortType = item.getAttribute("data-sort");
+  
+      if (sortType === "az") {
+        sorted.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sortType === "za") {
+        sorted.sort((a, b) => b.title.localeCompare(a.title));
+      } else if (sortType === "low-high") {
+        sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      } else if (sortType === "high-low") {
+        sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      }
+      createUsercard(sorted);
+    });
+  });
 
   let dropdownButton = document.querySelector(".dropdown-toggle span");
   let dropdownMenu = document.querySelector(".dropdown-menu");
@@ -164,26 +186,28 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (isLoggedIn && loggedInUser) {
     dropdownButton.textContent = loggedInUser.username;
-
     dropdownMenu.innerHTML = `
       <li><a class="dropdown-item logout-btn" href="#">Logout</a></li>
     `;
-
     document.querySelector(".logout-btn").addEventListener("click", () => {
       localStorage.removeItem("loggedInUser");
       localStorage.setItem("isLoggedIn", "false");
-
       Toastify({
-        text: "The speech was made!",
+        text: "Cixis edildi!",
         duration: 2000,
         gravity: "top",
         position: "right",
         backgroundColor: "#f44336",
       }).showToast();
-
       setTimeout(() => {
         window.location.href = "login.html";
       }, 1500);
     });
+  } else {
+    dropdownButton.textContent = "Sign Up";
+    dropdownMenu.innerHTML = `
+      <li><a class="dropdown-item" href="register.html">Register</a></li>
+      <li><a class="dropdown-item" href="login.html">Login</a></li>
+    `;
   }
 });

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link  rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"/>
+  <link rel="stylesheet" href="./assets/css/detail.css">
+    <title>Stobella</title>
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-md">
+          <img src="./assets/images/Snobella.png" alt="">
+          <!-- Search -->
+          <form class="d-flex search" role="search">
+            <div class="search-wrapper">
+              <input type="text" class="form-control search-input" placeholder="Search all product">
+              <i class="bi bi-search search-icon"></i>
+            </div>
+          </form>
+          <div class="d-flex align-items-center gap-3">
+            <!-- User dropdown -->
+            <div class="dropdown">
+              <button class="bg-transparent border-0 p-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person fs-5"></i> 
+                <span class="ms-1">Sign Up</span>
+              </button>
+            
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="register.html">Register</a></li>
+                <li><a class="dropdown-item" href="login.html">Login</a></li>
+                <li><a class="dropdown-item" href="">Logout</a></li>
+              </ul>
+            </div>
+          
+            <!-- Wishlist -->
+            <a href="wishlist.html" class="d-flex align-items-center text-decoration-none" style="color: #000; cursor: pointer;">
+              <i class="bi bi-heart"></i> 
+              <span class="ms-1">Wishlist</span>
+            </a>
+          
+            <!-- Basket -->
+            <a href="basket.html" class="d-flex align-items-center text-decoration-none" style="color: #000; cursor: pointer;">
+              <div class="cart-icon-wrapper">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+                <span>Basket</span>
+              </div>
+              
+            </a>
+          </div>
+          
+        </div>
+    </nav>
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 product-images position-relative">
+                <div class="row">
+                    <div class="col-2 d-flex flex-column">
+                        <div class="small-img-container active">
+                            <img src="https://via.placeholder.com/80x80/cccccc" class="img-fluid" alt="Küçük Resim 1">
+                        </div>
+                        <div class="small-img-container">
+                            <img src="https://via.placeholder.com/80x80/bbbbbb" class="img-fluid" alt="Küçük Resim 2">
+                        </div>
+                        <div class="small-img-container">
+                            <img src="https://via.placeholder.com/80x80/aaaaaa" class="img-fluid" alt="Küçük Resim 3">
+                        </div>
+                        <div class="small-img-container">
+                            <img src="https://via.placeholder.com/80x80/999999" class="img-fluid" alt="Küçük Resim 4">
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <span class="discount-badge">30%</span>
+                        <i class="fas fa-heart heart-icon"></i>
+                        <img src="https://via.placeholder.com/400x400/cccccc" class="img-fluid" alt="Büyük Resim">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>Hotel Magique Love and Magique Tote Bag</h3>
+                <div class="mb-2">
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="far fa-star text-warning"></i>
+                    <span class="ms-2">5.0 | 2 reviews</span>
+                </div>
+                <div class="price-options mb-3">
+                    <button class="selected">2-9 pieces <span class="fw-bold">US $20.00</span></button>
+                    <button>10-49 pieces <span class="fw-bold">US $15.00</span></button>
+                    <button>50 pieces <span class="fw-bold">US $12.00</span></button>
+                    <button>2-9 pieces <span class="fw-bold">US $20.00</span></button>
+                </div>
+                <div class="mb-3">
+                    <h5>Size</h5>
+                    <div class="d-flex">
+                        <button class="btn btn-outline-secondary btn-sm me-2">XS</button>
+                        <button class="btn btn-outline-secondary btn-sm me-2">S</button>
+                        <button class="btn btn-outline-secondary btn-sm me-2">M</button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <h5>Color</h5>
+                    <div class="d-flex">
+                        <button class="color-options selected" style="background-color: #e8790f;"></button>
+                        <button class="color-options" style="background-color: #198754;"></button>
+                        <button class="color-options" style="background-color: #0d6efd;"></button>
+                        <button class="color-options" style="background-color: #dc3545;"></button>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 d-md-block mb-3">
+                    <button class="btn add-to-card-button">Add to card</button>
+                    <button class="btn cash-payment-button">Cash payment</button>
+                </div>
+                <p class="whatsapp-order"><i class="fab fa-whatsapp"></i> WhatsApp Order</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="descr_area">
+        <div class="container">
+            <div class="descruption">
+                <h5>Product Description <span class="reviewss">Reviews (3)</span></h5>
+                <div class="descLinePurple"></div>
+                <p class="descruptionText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  <br> <br>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                     velit esse cillum dolore eu fugiat nulla
+                      pariatur.</p>
+                
+
+            </div>
+        </div>
+      </section>
+
+
+  <!-- Footer -->
+  <div class="footer-search-bar">
+    <div class="container footer-search-content">
+      <div class="footer-logo">Snobella</div>
+      <div class="footer-search-input">
+        <input type="text" placeholder="Search all product">
+        <i class="fas fa-search"></i>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-left">
+          <p class="footer-description">
+            The wise man therefore always holds selection<br>
+            The wise man therefore always rejects pleasures to secure other greater
+          </p>
+          <div class="footer-contact"><i class="fas fa-envelope"></i> Snobella@gmail.com</div>
+          <div class="footer-contact"><i class="fas fa-phone"></i> +748 383 23 14</div>
+          <button class="send-message-btn"><i class="fas fa-paper-plane"></i> Send message</button>
+        </div>
+
+        <div class="footer-columns">
+          <div class="footer-column">
+            <h4>Shop</h4>
+            <ul>
+              <li>Shoulder Bag</li>
+              <li>Backpack</li>
+              <li>Tote Bag</li>
+              <li>Hand Bag</li>
+              <li>Evening bags</li>
+              <li>Purse</li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Company</h4>
+            <ul>
+              <li>About us</li>
+              <li>Contact</li>
+              <li>Terms of Use</li>
+              <li>Customer service</li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Help</h4>
+            <ul>
+              <li>FAQ</li>
+              <li>Delivery</li>
+              <li>Cancellation of the order</li>
+              <li>Don't go back</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2020. All rights reserved.</div>
+        <div class="footer-socials">
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-whatsapp"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+      <script
+       type="text/javascript"
+       src="https://cdn.jsdelivr.net/npm/toastify-js"
+     ></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+     <script src="./assets/js/detail.js"></script>
+</body>
+</html>

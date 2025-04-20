@@ -3,6 +3,42 @@ let subtotalText = document.getElementById("subtotal");
 let totalText = document.getElementById("total");
 let confirmBtn = document.getElementById("confirmBtn");
 let clearAllBtn = document.getElementById("clearAllBtn");
+let dropdownButton = document.querySelector(".dropdown-toggle span");
+let dropdownMenu = document.querySelector(".dropdown-menu");
+let isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+if (isLoggedIn && loggedInUser) {
+  dropdownButton.textContent = loggedInUser.username;
+
+  dropdownMenu.innerHTML = `
+    <li><a class="dropdown-item logout-btn" href="#">Logout</a></li>
+  `;
+
+  document.querySelector(".logout-btn").addEventListener("click", () => {
+    localStorage.removeItem("loggedInUser");
+    localStorage.setItem("isLoggedIn", "false");
+
+    Toastify({
+      text: "Cixis edildi!",
+      duration: 2000,
+      gravity: "top",
+      position: "right",
+      backgroundColor: "#f44336",
+    }).showToast();
+
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1500);
+  });
+} else {
+  dropdownButton.textContent = "Sign Up";
+
+  dropdownMenu.innerHTML = `
+    <li><a class="dropdown-item" href="register.html">Register</a></li>
+    <li><a class="dropdown-item" href="login.html">Login</a></li>
+  `;
+}
 
 let cartItems = [];
 
@@ -25,6 +61,8 @@ function updateTotals() {
 }
 
 function renderCart() {
+  cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
   cartContainer.innerHTML = "";
   cartItems.forEach((item, index) => {
     let cartItem = document.createElement("div");
@@ -107,7 +145,7 @@ function renderCart() {
       localStorage.removeItem("cartCleared"); 
       renderCart();
       updateTotals();
-      updateCartCount
+      updateCartCount();
     };
 
     updateCartCount();

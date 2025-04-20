@@ -10,10 +10,45 @@ function updateCartCount() {
 document.addEventListener("DOMContentLoaded", async () => {
     updateCartCount();
     let products = (await axios("http://localhost:3001/products")).data;
-
     let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
     let container = document.querySelector(".cards");
+    let dropdownButton = document.querySelector(".dropdown-toggle span");
+    let dropdownMenu = document.querySelector(".dropdown-menu");
+    let isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  
+    if (isLoggedIn && loggedInUser) {
+      dropdownButton.textContent = loggedInUser.username;
+    
+      dropdownMenu.innerHTML = `
+        <li><a class="dropdown-item logout-btn" href="#">Logout</a></li>
+      `;
+    
+      document.querySelector(".logout-btn").addEventListener("click", () => {
+        localStorage.removeItem("loggedInUser");
+        localStorage.setItem("isLoggedIn", "false");
+    
+        Toastify({
+          text: "Cixis edildi!",
+          duration: 2000,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "#f44336",
+        }).showToast();
+    
+        setTimeout(() => {
+          window.location.href = "login.html";
+        }, 1500);
+      });
+    } else {
+      dropdownButton.textContent = "Sign Up";
+    
+      dropdownMenu.innerHTML = `
+        <li><a class="dropdown-item" href="register.html">Register</a></li>
+        <li><a class="dropdown-item" href="login.html">Login</a></li>
+      `;
+    }
 
     let filtered = products.filter(product => favorites.includes(product.id.toString()));
 
