@@ -6,7 +6,9 @@
       "star": "./assets/images/star.png",
       "title": "Elegant Shoulder Bag with Golden Strap",
       "price": 125.00,
-      "description": "From $340.00"
+      "description": "From $340.00",
+      "size": ["S", "M", "L"],
+      "color": ["Black", "Beige", "Gold"]
     },
     {
       "id": 2,
@@ -14,7 +16,9 @@
       "star": "./assets/images/star.png",
       "title": "Classic Leather Handbag for Women",
       "price": 140.00,
-      "description": "From $340.00"
+      "description": "From $340.00",
+      "size": ["M", "L"],
+      "color": ["Brown", "Black"]
     },
     {
       "id": 3,
@@ -22,7 +26,9 @@
       "star": "./assets/images/star.png",
       "title": "Trendy Urban Shoulder Bag – Black Edition",
       "price": 135.00,
-      "description": "From $340.00"
+      "description": "From $340.00",
+      "size": ["S", "M", "L", "XL"],
+      "color": ["Black", "Grey"]
     },
     {
       "id": 4,
@@ -30,7 +36,9 @@
       "star": "./assets/images/star.png",
       "title": "Vintage Leather Purse with Buckle Detail",
       "price": 150.00,
-      "description": "From $340.00"
+      "description": "From $340.00",
+      "size": ["S", "M"],
+      "color": ["Dark Brown", "Tan"]
     },
     {
       "id": 5,
@@ -38,7 +46,9 @@
       "star": "./assets/images/star.png",
       "title": "Compact Shoulder Bag for Daily Use",
       "price": 120.00,
-      "description": "From $340.00"
+      "description": "From $340.00",
+      "size": ["M", "L", "XL"],
+      "color": ["Blue", "Beige", "Black"]
     },
     {
       "id": 6,
@@ -46,7 +56,9 @@
       "star": "./assets/images/star.png",
       "title": "Premium Quality Leather Travel Bag",
       "price": 160.00,
-      "description": "From $340.00"
+      "description": "From $340.00",
+      "size": ["L", "XL"],
+      "color": ["Black", "Olive Green"]
     }
   ]
 }

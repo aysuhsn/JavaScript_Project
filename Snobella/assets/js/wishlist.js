@@ -1,8 +1,18 @@
+function updateCartCount() {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    let count = cartItems.reduce((total, item) => total + item.quantity, 0);
+    let cartCountSpan = document.querySelector(".cart-count");
+    if (cartCountSpan) {
+      cartCountSpan.textContent = count;
+    }
+  }
+
 document.addEventListener("DOMContentLoaded", async () => {
+    updateCartCount();
     let products = (await axios("http://localhost:3001/products")).data;
 
     let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
     let container = document.querySelector(".cards");
 
     let filtered = products.filter(product => favorites.includes(product.id.toString()));
@@ -10,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (filtered.length === 0) {
         let msg = document.createElement("p");
         msg.style.marginLeft = "20px";
-        msg.textContent = "Hec bir favori mehsul yoxdur.";
+        msg.textContent = "There is no favorite product.";
         container.appendChild(msg);
     }
 
@@ -66,26 +76,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     container.addEventListener("click", (e) => {
         if (e.target.classList.contains("heart-icon")) {
-            const id = e.target.getAttribute("data-id");
+            let id = e.target.getAttribute("data-id");
             favorites = favorites.filter(favId => favId !== id);
             localStorage.setItem("favorites", JSON.stringify(favorites));
             e.target.closest(".card").remove();
         }
 
         if (e.target.classList.contains("add-to-cart")) {
-            const id = e.target.id;
-            const productToAdd = products.find(p => p.id.toString() === id);
+            let id = e.target.id;
+            let productToAdd = products.find(p => p.id.toString() === id);
 
-            const existingItem = cart.find(item => item.id === productToAdd.id);
-            if (existingItem) {
-                existingItem.count = (existingItem.count || 1) + 1;
+            let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+            let existing = cartItems.find(item => item.id === productToAdd.id);
+            if (existing) {
+                existing.quantity += 1;
             } else {
-                productToAdd.count = 1;
-                cart.push(productToAdd);
+                cartItems.push({
+                    id: productToAdd.id,
+                    name: productToAdd.name,
+                    price: parseFloat(productToAdd.price),
+                    image: productToAdd.image,
+                    quantity: 1
+                });
             }
-
-            localStorage.setItem("cart", JSON.stringify(cart));
-            alert("Mehsul sebete elave olundu!");
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            alert("Product added to cart!");
+            updateCartCount();
         }
     });
 
@@ -97,71 +113,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     clearAllBtn.addEventListener("click", () => {
-        if (confirm("Butun favorileri silmek istediyinize eminsiniz?")) {
+        if (confirm("Are you sure you want to delete all favorites?")) {
             favorites = [];
             localStorage.setItem("favorites", JSON.stringify(favorites));
-            container.innerHTML = ""; 
+            container.innerHTML = "";
 
             let msg = document.createElement("p");
             msg.style.marginLeft = "20px";
-            msg.textContent = "Hec bir favori mehsul yoxdur.";
+            msg.textContent = "There is no favorite product.";
             container.appendChild(msg);
 
             clearAllBtn.style.display = "none";
         }
     });
-
-    let dropdownButton = document.querySelector(".dropdown-toggle span");
-    let dropdownMenu = document.querySelector(".dropdown-menu");
-    let isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-
-    if (isLoggedIn && loggedInUser) {
-        dropdownButton.textContent = loggedInUser.username;
-
-        dropdownMenu.innerHTML = "";
-        let li = document.createElement("li");
-        let logout = document.createElement("a");
-        logout.className = "dropdown-item logout-btn";
-        logout.href = "#";
-        logout.textContent = "Logout";
-        li.appendChild(logout);
-        dropdownMenu.appendChild(li);
-
-        logout.addEventListener("click", () => {
-            localStorage.removeItem("loggedInUser");
-            localStorage.setItem("isLoggedIn", "false");
-
-            Toastify({
-                text: "Cixis edildi!",
-                duration: 2000,
-                gravity: "top",
-                position: "right",
-                backgroundColor: "#f44336"
-            }).showToast();
-
-            setTimeout(() => {
-                window.location.href = "login.html";
-            }, 1500);
-        });
-    } else {
-        dropdownButton.textContent = "Sign Up";
-        dropdownMenu.innerHTML = "";
-
-        let loginLi = document.createElement("li");
-        let loginLink = document.createElement("a");
-        loginLink.className = "dropdown-item";
-        loginLink.href = "login.html";
-        loginLink.textContent = "Login";
-        loginLi.appendChild(loginLink);
-
-        let signupLi = document.createElement("li");
-        let signupLink = document.createElement("a");
-        signupLink.className = "dropdown-item";
-        signupLink.href = "signup.html";
-        signupLink.textContent = "Sign Up";
-        signupLi.appendChild(signupLink);
-
-        dropdownMenu.append(loginLi, signupLi);
-    }
 });

@@ -1,5 +1,57 @@
+function updateCartCount() {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const count = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const cartCountSpan = document.querySelector(".cart-count");
+  if (cartCountSpan) {
+    cartCountSpan.textContent = count;
+  }
+}
+
+
+window.addToCart = function (productId) {
+  let products = JSON.parse(localStorage.getItem("allProducts")) || [];
+
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  const existingItem = cartItems.find(item => item.id === productId);
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cartItems.push({
+      id: product.id,
+      name: product.title,
+      price: parseFloat(product.price),
+      image: product.image,
+      quantity: 1,
+    });
+  }
+
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  localStorage.removeItem("cartCleared");
+
+  Toastify({
+    text: "Added to cart!",
+    duration: 1000,
+    gravity: "top",
+    position: "right",
+    style: {
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+    },
+  }).showToast();
+
+  updateCartCount();
+
+};
+
 document.addEventListener("DOMContentLoaded", async () => {
+  updateCartCount();
+
   let products = (await axios("http://localhost:3001/products")).data;
+  localStorage.setItem("allProducts", JSON.stringify(products));
+
   let userCard = document.querySelector(".cards");
 
   function createUsercard() {
@@ -10,7 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       let heart = document.createElement("i");
       heart.className = "fa-regular fa-heart heart-icon";
       let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-      if (favorites.includes(product.id)) {
+      if (favorites.includes(product.id.toString())) {
         heart.classList.add("fa-solid", "active");
         heart.classList.remove("fa-regular");
       }
@@ -45,14 +97,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       priceDiv.append(priceP, desc);
       card.appendChild(priceDiv);
 
-      // Add to Cart button
       let addToCartBtn = document.createElement("button");
       addToCartBtn.className = "add-to-cart";
       addToCartBtn.id = product.id;
       addToCartBtn.textContent = "Add to Cart";
+      addToCartBtn.addEventListener("click", function () {
+        window.addToCart(product.id);
+      });
       card.appendChild(addToCartBtn);
 
-      // Badge
       let badge = document.createElement("div");
       badge.classList.add("badge");
       if (index === 0 || index === 3) {
@@ -65,7 +118,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.appendChild(badge);
       }
 
-      // Heart click
       heart.addEventListener("click", () => {
         heart.classList.toggle("fa-solid");
         heart.classList.toggle("fa-regular");
@@ -73,9 +125,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
         if (heart.classList.contains("active")) {
-          favorites.push(product.id);
+          favorites.push(product.id.toString());
+
           Toastify({
-            text: "Sevimlilərə əlavə edildi",
+            text: "Added to favorites",
             duration: 1000,
             gravity: "top",
             position: "right",
@@ -86,7 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else {
           favorites = favorites.filter((itemId) => itemId != product.id);
           Toastify({
-            text: "Sevimlilərdən silindi",
+            text: "Removed from favorites",
             duration: 1000,
             gravity: "top",
             position: "right",
@@ -121,11 +174,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       localStorage.setItem("isLoggedIn", "false");
 
       Toastify({
-        text: "Cixis edildi!",
+        text: "The speech was made!",
         duration: 2000,
         gravity: "top",
         position: "right",
-        backgroundColor: "#f44336"
+        backgroundColor: "#f44336",
       }).showToast();
 
       setTimeout(() => {
